@@ -1,0 +1,53 @@
+type User {
+    userId: ID
+    name: String
+    phone: String
+    email: String
+    order: [Order]
+}
+type UserDto {
+    userId:ID
+    name: String
+    phone: String
+    email: String
+    password:String
+}
+
+input UserInput {
+    name: String
+    email: String
+    phone: String
+    password: String
+}
+
+type Order {
+    orderId: ID!
+    orderDetail: String
+    address: String
+    price: String
+    user: User
+}
+
+input OrderInput {
+    orderDetail: String
+    address: String
+    price: String
+}
+
+type Query {
+    findUser(userId: ID!): User
+    findAllUsers: [User]
+    fetchOrderById(id: ID!): Order
+    fetchOrders: [Order]
+}
+
+type Mutation {
+    addUser(userInput: UserInput): UserDto
+    updateUser(userId: ID!, userInput: UserInput): User
+    deleteUser(userId: ID!): User
+    addAllUsers(userInputs: [UserInput]): [User]
+    createOrder(orderInput: OrderInput): Order
+    updateOrder(id: ID!, orderInput: OrderInput): Order
+    deleteOrder(id: ID!): Boolean
+}
+
